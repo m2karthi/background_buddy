@@ -1,23 +1,84 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
+import portalLayout from '../layout/portalLayout.vue'
+// import companyLayout from '../layout/cmpnyLayout.vue'
+// import userLayout from '../layout/userLayout.vue'
+import authLayout from '../layout/authlayout.vue'
+
+
 
 Vue.use(VueRouter)
 
 const routes = [
+
+
+  //ADMIN ROUTES
+
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/bgchecker",
+    // redirect: '/home',
+    component: portalLayout,
+
+    children: [
+      {
+        path: '/',
+        name: 'BackgroundChecker',
+        component: () => import('../views/bgchecker.vue')
+      },
+
+      {
+        path: 'shield',
+        name: 'shield',
+        component: () => import('../views/shield.vue')
+      },
+      {
+        path: 'plagarism',
+        name: 'plagarism',
+        component: () => import('../views/plagarism.vue')
+      },
+
+
+    ],
   },
+
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: "/",
+    // redirect: '/bgc',
+    component: authLayout,
+    meta: {
+      requiresAuth: true,
+      isAdmin: true
+    },
+    children: [
+      {
+        path: '/',
+        name: 'studentHome',
+        component: () => import('../views/auth/login.vue')
+      },
+      // {
+      //   path: '/bgchecker',
+      //   name: 'BackgroundChecker',
+      //   component: () => import('../views/bgchecker.vue')
+      // }
+
+
+
+
+    ],
+  },
+
+  // {
+  //   path: "/login",
+  //   component: authLayout,
+  //   children: [
+  //     {
+  //       path: '/auth',
+  //       name: 'login',
+  //       component: () => import('../views/auth/login.vue')
+  //     },
+  //   ],
+  // },
 ]
 
 const router = new VueRouter({
