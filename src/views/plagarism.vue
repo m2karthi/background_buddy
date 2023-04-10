@@ -20,7 +20,7 @@
                 required
                 clearable
               ></v-text-field>
-              <v-autocomplete
+              <!-- <v-autocomplete
                 chips
                 :items= items
                 clearable
@@ -31,13 +31,13 @@
                 solo
                 lable="Select Skills"
                 required
-                ></v-autocomplete>
+                ></v-autocomplete> -->
                  <v-btn
                           color="warning"
                           dark
                           type="submit"
                         >
-                          Conduct a background check
+                          Conduct a Plagarism check
                         </v-btn>
         </v-form>
     </v-card>

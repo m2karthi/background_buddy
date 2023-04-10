@@ -46,8 +46,14 @@
       width="500">
 
       <v-card v-if="url!=null">
-        <p>Click this link to Claim Your Proof!</p>
-        <a>{{ url }}</a>
+        <h3>Scan the QR to Claim Your Proof!</h3>
+        <!-- <a>{{ url }}</a> -->
+            <img
+      width="300"
+      aspect-ratio="16/9"
+      cover
+      src="../assets/qr.jpg"
+    />
       </v-card>
     </v-dialog>
     </div>
@@ -134,7 +140,7 @@ export default {
 
             var strdata= JSON.stringify(data)
             console.log("Sending data", strdata)
-            await axios.post('http://localhost:3001/home/repo', data).then((res)=>{
+            await axios.post('https://backendeth.onrender.com/home/repo', data).then((res)=>{
                 console.log("Sending data", res)
                  this.callbackId= res.data.callbackId
                  this.url= res.data.url
