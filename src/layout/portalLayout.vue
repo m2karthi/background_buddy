@@ -8,8 +8,14 @@
       height="100vh"
       class="deep-purple accent-4"
     >
-      <div id="logo">
-        <h3 class="white--text">Background Buddy</h3>
+      <div class="d-flex" id="logo">
+        <!-- <font-awesome-icon :icon="['fas', 'microscope']" /> -->
+            <v-icon color="white mr-2 pr-2">fa-brands fa-slack</v-icon>
+            <!-- <v-spacer></v-spacer> -->
+
+        <h3 class="white--text pl-2">Admin Panel</h3>
+        <!-- <h3 class="white--text">Exam Alteration Panel</h3> -->
+
       </div>
 
       <v-list dense nav>
@@ -72,7 +78,7 @@
       </v-btn>
 
       <v-menu offset-y class="error pa-0 ma-0">
-        <!-- <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ on, attrs }">
           <v-btn color="primary" text dark v-bind="attrs" v-on="on">
             <v-img
               alt="Vuetify Logo"
@@ -81,18 +87,18 @@
               src="../assets/profile-small.svg"
             />
             <div class="mr-3 ml-2">
-              <div class="red--text">CIR</div>
+              <div class="red--text">Exam Dept</div>
               <div class="grey--text subtitle-2">Admin</div>
             </div>
             <v-icon class="ml-1" color="red">mdi-chevron-down</v-icon>
           </v-btn>
-        </template> -->
-        <!-- <v-list class="error pa-0 ma-0">
+        </template> 
+        <v-list class="error pa-0 ma-0">
           <v-list-item @click="logout">
             <v-icon class="mr-1" color="black">mdi-logout</v-icon>
             <v-list-item-title>Logout</v-list-item-title>
           </v-list-item>
-        </v-list> -->
+        </v-list>
       </v-menu>
 
       <!-- <v-btn href="" text>
@@ -111,9 +117,9 @@
         >@2023 | Made with 💖 by<a
           class="link"
           target="_blank"
-          href="https://webilicious.in"
+          href=""
         >
-          Background Buddy</a
+          Exam Alteration Helper</a
         ></span
       >
       <v-spacer></v-spacer>
@@ -121,8 +127,8 @@
         <div class="d-flex">
           <li>Associated with</li>
         <li>
-          <a class="link" target="_blank" href="https://www.reclaimprotocol.org/"
-            >Reclaim Protocol</a
+          <a class="link" target="_blank" href="https://intranet.cb.amrita.edu/"
+            >Amrita</a
           >
         </li>
         </div>
@@ -134,6 +140,7 @@
   
   <script>
 // import { mapGetters, mapActions } from "vuex";
+import {auth} from '../firebaseConfig.js';
 
 export default {
   name: "portalLayout",
@@ -158,22 +165,32 @@ export default {
 
     async getMenuItems() {
       this.menuItems = [
+        // {
+        //   title: "Home",
+        //   icon: "fa-solid fa-house",
+        //   route: "/admin",
+        // },
         {
-          title: "Home",
-          icon: "fa-solid fa-house",
-          route: "/bgchecker",
-        },
-        {
-          title: "Shield",
-          route: "/bgchecker/shield",
-          icon: "fa-solid fa-paperclip",
-        },
-        
-        {
-          title: "Plagarism",
-          route: "/bgchecker/plagarism",
+          title: "Faculty",
+          route: "/admin/faculties",
           icon: "fa-solid fa-graduation-cap",
         },
+        {
+          title: "Scheduler",
+          route: "/admin/scheduler",
+          icon: "fa-solid fa-calendar-days",
+        },
+        {
+          title: "Exams",
+          route: "/admin/exam",
+          icon: "fa-solid fa-microscope",
+        },
+        {
+          title: "Settings",
+          route: "/admin/settings",
+          icon: "fa-sharp fa-gear",
+        },
+        
         // {
         //   title: "Companies",
         //   route: "/admin/companies",
@@ -200,7 +217,18 @@ export default {
     },
 
     logout() {
-      this.$router.push(`/login`);
+      auth.signOut()
+    .then(() => {
+      // Logout successful
+      console.log('User logged out successfully.');
+      // Add any additional actions after logout here
+      this.$router.push(`/`);
+    })
+    .catch((error) => {
+      // An error occurred during logout
+      console.error('Error logging out:', error);
+      // Handle any error message or additional actions here
+    });
     },
     showHideNav() {
       if (this.drawer) {
