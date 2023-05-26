@@ -1,7 +1,7 @@
 <template>
   <div class="forgot-password">
     <div class="form-container">
-      <v-card>
+      <v-card class="rounded-xl" >
         <v-card-title class="text-center">Forgot Password</v-card-title>
         <v-card-text>
           <v-form @submit.prevent="resetPassword">
