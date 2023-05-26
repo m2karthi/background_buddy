@@ -106,6 +106,7 @@ export default {
 
 <style scoped>
 .forgot-password {
+  /* background: linear-gradient(#6d6b7e, #59687d); */
   display: flex;
   justify-content: center;
   align-items: center;

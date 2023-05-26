@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main class="pa-4">
+    <v-main class="ma-0 pa-0">
       <!-- <div>Login</div> -->
       <v-container fluid>
         <router-view></router-view>
@@ -25,7 +25,10 @@ html {
 .v-main {
   margin: 0;
   padding: 0;
+  height: 100vh;
   font-family: sans-serif;
-  background: linear-gradient(#3b2abd, #15181c);
+  /* background: linear-gradient(#6d6b7e, #59687d); */
+    background: radial-gradient(#653d84, #332042);
+
 }
 </style>
