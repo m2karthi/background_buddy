@@ -195,6 +195,7 @@ export default {
     ],
     allFaculties: [],
     editedIndex: -1,
+    deleItem: null,
     editedItem: {
       id: null,
       name: null,
@@ -278,6 +279,7 @@ export default {
         return object.id === item.id;
       });
       this.editedItem = Object.assign({}, item);
+      this.deleItem= item
       this.dialog = true;
     },
 
@@ -287,6 +289,7 @@ export default {
       this.editedIndex = this.allFaculties.findIndex((object) => {
         return object.id === item.id;
       });
+      
 
       console.log("index deleteItem", this.editedIndex);
       this.editedItem = Object.assign({}, item);
@@ -296,8 +299,8 @@ export default {
 
     async deleteItemConfirm() {
       // this.allFaculties.splice(this.editedIndex, 1);
-      // await facultyService.deleteFaculty(this.editedItem);
-      console.log("delete Item", this.editedItem);
+      await facultyService.deleteFaculty(this.deleItem);
+      console.log("delete Item", this.deleItem);
       console.log("deleteItemConfirm");
       this.closeDelete();
       this.initialize()

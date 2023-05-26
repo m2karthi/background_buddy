@@ -180,17 +180,17 @@ async function deleteFaculty(facultyData) {
         const { email, password, id } = facultyData;
         console.log('email, password, id', email, password, id)
 
-        const user = id
+        // const user = id
 
-        await user.delete().then(() => {
-            // User deleted.
-            console.error(' deleteting user');
+        // await user.delete().then(() => {
+        //     // User deleted.
+        //     console.error(' deleteting user');
 
-        }).catch((error) => {
-            // An error ocurred
-            // ...
-            console.error('Error deleting user:', error);
-        });
+        // }).catch((error) => {
+        //     // An error ocurred
+        //     // ...
+        //     console.error('Error deleting user:', error);
+        // });
 
 
 
