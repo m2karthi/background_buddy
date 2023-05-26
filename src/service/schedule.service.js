@@ -120,7 +120,7 @@ async function updateScheduleData(ScheduleData) {
         Object.assign(allScheduleData[index], ScheduleData);
 
         await db.collection('pages').doc('schedules').update({
-            schedules: allScheduleData
+            schedule: allScheduleData
         }).then(() => {
             console.log("schedule Document successfully updated! ");
         }).catch((error) => {
