@@ -8,8 +8,14 @@
       height="100vh"
       class="primary"
     >
-      <div id="logo">
-        <h3 class="white--text">Recruitment Portal</h3>
+      <div class="d-flex" id="logo">
+        <!-- <font-awesome-icon :icon="['fas', 'microscope']" /> -->
+            <v-icon color="white mr-2 pr-2">fa-brands fa-slack</v-icon>
+            <!-- <v-spacer></v-spacer> -->
+
+        <h3 class="white--text pl-2">Faculty Portal</h3>
+        <!-- <h3 class="white--text">Exam Alteration Panel</h3> -->
+
       </div>
 
       <v-list dense nav>
@@ -82,7 +88,7 @@
             />
             <div class="mr-3 ml-2">
               <div class="black--text">{{ username }}</div>
-              <div class="grey--text subtitle-2">Recruiter</div>
+              <div class="grey--text subtitle-2">Faculty</div>
             </div>
             <v-icon class="ml-1" color="black">mdi-chevron-down</v-icon>
           </v-btn>
@@ -111,19 +117,21 @@
         >@2023 | Made with 💖 by<a
           class="link"
           target="_blank"
-          href="https://webilicious.in"
+          href=""
         >
-          Webilicious</a
+          Exam Alteration Helper</a
         ></span
       >
       <v-spacer></v-spacer>
       <ul class="footer-right">
+        <div class="d-flex">
+          <li>Associated with</li>
         <li>
-          <a class="link" target="_blank" href="https://webilicious.in"
-            >Webilicious</a
+          <a class="link" target="_blank" href="https://intranet.cb.amrita.edu/"
+            >Amrita</a
           >
         </li>
-        <li>Help</li>
+        </div>
         <li>Terms</li>
       </ul>
     </v-footer>
@@ -132,6 +140,9 @@
     
     <script>
 // import { mapGetters, mapActions } from "vuex";
+import {auth} from '../firebaseConfig.js';
+import { facultyService } from '../service'
+
 
 export default {
   name: "companyLayout",
@@ -143,6 +154,7 @@ export default {
       isTemporary: false,
       menuItems: [],
       accountItems: [],
+      username: 'Abhi',
     };
   },
   created() {
@@ -151,31 +163,34 @@ export default {
   computed: {},
   methods: {
     async init() {
-      this.username = this.$route.params.id;
-      console.log("username", this.username);
+      // this.username = this.$route.params.id;
+      
       this.getMenuItems();
+      const res = await facultyService.getUserById()
+      this.username = res.name;
+      console.log("username", this.username);
     },
 
     async getMenuItems() {
       this.menuItems = [
+        // {
+        //   title: "Dashboard",
+        //   icon: "fa-solid fa-house",
+        //   route: "/recruiter/dashboard",
+        // },
         {
-          title: "Dashboard",
-          icon: "fa-solid fa-house",
-          route: "/recruiter/" + this.username + "/dashboard",
+          title: "Schedules",
+          route: "/faculty/schedules",
+          icon: "fa-solid fa-calendar-days",
         },
         {
-          title: "Drives",
-          route: "/recruiter/" + this.username + "/drives",
-          icon: "fa-solid fa-paperclip",
-        },
-        {
-          title: "Students",
-          route: "/recruiter/" + this.username + "/students",
-          icon: "fa-solid fa-graduation-cap",
+          title: "Profile",
+          route: "/faculty/profile",
+          icon: "fa-solid fa-user",
         },
         {
           title: "Settings",
-          route: "/recruiter/" + this.username + "/settings",
+          route: "/faculty/settings",
           icon: "fa-solid fa-gears",
         },
       ];
@@ -194,7 +209,18 @@ export default {
       ];
     },
     logout() {
-      this.$router.push(`/login`);
+      auth.signOut()
+    .then(() => {
+      // Logout successful
+      console.log('User logged out successfully.');
+      // Add any additional actions after logout here
+      this.$router.push(`/`);
+    })
+    .catch((error) => {
+      // An error occurred during logout
+      console.error('Error logging out:', error);
+      // Handle any error message or additional actions here
+    });
     },
     showHideNav() {
       if (this.drawer) {

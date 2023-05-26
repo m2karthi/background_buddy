@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <!-- <portalLayout></portalLayout>s -->
-
     <v-main>
       <router-view />
     </v-main>
