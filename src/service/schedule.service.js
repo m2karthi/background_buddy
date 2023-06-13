@@ -4,6 +4,7 @@ import {
 
 export const scheduleService = {
     getAllScheduleData,
+    getReScheduleData,
     updateScheduleData,
     addScheduleData,
     getUserById,
@@ -28,6 +29,49 @@ async function getAllScheduleData() {
         }
     } catch (error) {
         console.error('Error retrieving all schedule data:', error);
+        throw error;
+    }
+}
+
+async function getReScheduleData() {
+    try {
+        const doc = await db.collection('pages').doc('schedules').get();
+        if (doc.exists) {
+            const data = doc.data();
+          
+            const schedules = data.schedule || []
+            console.log("all schedule data fetched", schedules)
+
+            const filteredSchedules = [];
+
+            for (let i = 0; i < schedules.length; i++) {
+                const schedule = schedules[i];
+                var count = 0
+                if (schedule.status) {
+                    if (schedule.status === "Request" || schedule.status === "Accept" || schedule.status === 'Reject')
+                        if (count %3 == 0){
+                        schedule['color'] = "blue lighten-1"
+                    }
+                        else if (count %3 == 1){
+                        schedule['color'] = "green lighten-1"
+
+                    }else{
+                        schedule['color'] = "orange lighten-1"
+
+                    }
+                    filteredSchedules.push(schedule);
+                    count += 1;
+                }
+            }
+            console.log("filteredSchedules data fetched", filteredSchedules)
+
+
+            return filteredSchedules;
+        } else {
+            throw new Error('filteredSchedules not found');
+        }
+    } catch (error) {
+        console.error('Error retrieving filteredSchedules  data:', error);
         throw error;
     }
 }
