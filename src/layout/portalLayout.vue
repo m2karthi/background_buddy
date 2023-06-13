@@ -181,6 +181,11 @@ export default {
           icon: "fa-solid fa-calendar-days",
         },
         {
+          title: "Rescheduler",
+          route: "/admin/rescheduler",
+          icon: "fa-light fa-calendar-xmark",
+        },
+        {
           title: "Exams",
           route: "/admin/exam",
           icon: "fa-solid fa-microscope",

@@ -111,6 +111,7 @@ export default {
     return {
       email: "",
       password: "",
+      btnclicked:false,
 
       error: "",
       snackbarMessage: "",
@@ -121,13 +122,16 @@ export default {
   },
   computed: {
     emailErrors() {
-      const errors = [];
-      if (!this.email) {
-        errors.push("Email is required");
-      } else if (!this.isValidEmail(this.email)) {
-        errors.push("Invalid email format");
-      }
-      return errors;
+      // if (this.btnclicked == true) {
+        
+        const errors = [];
+        if (!this.email) {
+          errors.push("Email is required");
+        } else if (!this.isValidEmail(this.email)) {
+          errors.push("Invalid email format");
+        }
+        return errors;
+      // } 
     },
     passwordErrors() {
       const errors = [];
@@ -136,15 +140,19 @@ export default {
       }
       return errors;
     },
+    
   },
   methods: {
+
     isValidEmail(email) {
       // Add your email validation logic here
       // This is a basic example, you may want to use a more robust email validation library
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return emailRegex.test(email);
     },
+    
     async login() {
+      this.btnclicked = true
       if (this.emailErrors.length === 0 && this.passwordErrors.length === 0) {
         await firebase
           .auth()

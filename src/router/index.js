@@ -42,6 +42,11 @@ const routes = [
         name: 'scheduler',
         component: () => import('../views/admin/scheduler.vue')
       },
+      {
+        path: 'rescheduler',
+        name: 'rescheduler',
+        component: () => import('../views/admin/rescheduler.vue')
+      },
       
       {
         path: 'settings',
