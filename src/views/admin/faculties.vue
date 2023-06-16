@@ -3,7 +3,7 @@
     :headers="headers"
     :items="allFaculties"
     sort-by="designation"
-    class="elevation-1 [item.selected && 'selected']"
+    class="elevation-1 fac [item.selected && 'selected']"
     @click:row="handleClick"
   >
     <template v-slot:top>
@@ -18,116 +18,120 @@
             </v-btn>
           </template>
           <v-card>
-            <v-card-title>
-              <span class="text-h5">{{ formTitle }}</span>
-            </v-card-title>
+            <form @submit.prevent="save">
+              <v-card-title>
+                <span class="text-h5">{{ formTitle }}</span>
+              </v-card-title>
 
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      clearable
-                      required
-                      v-model="editedItem.name"
-                      label="Name"
-                      type="text"
-                      maxlength="30"
-                      minlength="3"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-select
-                      :items="allDesignations"
-                      required
-                      v-model="editedItem.designation"
-                      label="Designation"
-                    ></v-select>
-                  </v-col>
-                  <v-col v-if="editedIndex == -1" cols="12" sm="6" md="4">
-                    <v-text-field
-                      clearable
-                      required
-                      v-model="editedItem.email"
-                      label="Email"
-                      type="email"
-                      maxlength="50"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col v-if="editedIndex == -1" cols="12" sm="6" md="4">
-                    <v-text-field
-                      clearable
-                      required
-                      v-model="editedItem.password"
-                      label="Password"
-                      type="password"
-                      maxlength="30"
-                      minlength="6"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      clearable
-                      required
-                      v-model="editedItem.mobile"
-                      label="Mobile (+91)"
-                      type="number"
-                      maxlength="10"
-                      minlength="10"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      required
-                      v-model="editedItem.dob"
-                      label="DOB"
-                      type="date"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      required
-                      v-model="editedItem.doj"
-                      label="DOJ"
-                      type="date"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-select
-                      clearable
-                      required
-                      :items="allGenders"
-                      v-model="editedItem.gender"
-                      label="Gender"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      required
-                      v-model="editedItem.qualification"
-                      label="Qualification"
-                      clearable
-                      maxlength="30"
-                      minlength="2"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        clearable
+                        required
+                        v-model="editedItem.name"
+                        label="Name"
+                        type="text"
+                        maxlength="30"
+                        minlength="3"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        :items="allDesignations"
+                        required
+                        v-model="editedItem.designation"
+                        label="Designation"
+                      ></v-select>
+                    </v-col>
+                    <v-col v-if="editedIndex == -1" cols="12" sm="6" md="4">
+                      <v-text-field
+                        clearable
+                        required
+                        v-model="editedItem.email"
+                        label="Email"
+                        type="email"
+                        maxlength="50"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col v-if="editedIndex == -1" cols="12" sm="6" md="4">
+                      <v-text-field
+                        clearable
+                        required
+                        v-model="editedItem.password"
+                        label="Password"
+                        type="password"
+                        maxlength="30"
+                        minlength="6"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        clearable
+                        required
+                        v-model="editedItem.mobile"
+                        label="Mobile (+91)"
+                        type="number"
+                        maxlength="10"
+                        minlength="10"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        required
+                        v-model="editedItem.dob"
+                        label="DOB"
+                        type="date"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        required
+                        v-model="editedItem.doj"
+                        label="DOJ"
+                        type="date"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        clearable
+                        required
+                        :items="allGenders"
+                        v-model="editedItem.gender"
+                        label="Gender"
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        required
+                        v-model="editedItem.qualification"
+                        label="Qualification"
+                        clearable
+                        maxlength="30"
+                        minlength="2"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
 
-            <v-card-actions>
-              <v-btn
-                v-if="editedIndex != -1"
-                color="error darken-1"
-                text
-                @click="deleteItem(editedItem)"
-              >
-                Delete
-              </v-btn>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
-              <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
-            </v-card-actions>
+              <v-card-actions>
+                <v-btn
+                  v-if="editedIndex != -1"
+                  color="error darken-1"
+                  text
+                  @click="deleteItem(editedItem)"
+                >
+                  Delete
+                </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="close">
+                  Cancel
+                </v-btn>
+                <v-btn color="blue darken-1" type="submit" text > Save </v-btn>
+              </v-card-actions>
+            </form>
           </v-card>
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
@@ -247,16 +251,16 @@ export default {
     async initialize() {
       this.allFaculties = await facultyService.getAllFacultyData();
       //       this.allFaculties = [{
-          // id: "f1",
-          // name: "John Doe",
-          // designation: "Professor",
-          // email: "johndoe@example.com",
-          // mobile: "1234567890",
-          // password: "password123",
-          // dob: "1990-01-01",
-          // doj: "2010-05-15",
-          // gender: "Male",
-          // qualification: "Ph.D.",
+      // id: "f1",
+      // name: "John Doe",
+      // designation: "Professor",
+      // email: "johndoe@example.com",
+      // mobile: "1234567890",
+      // password: "password123",
+      // dob: "1990-01-01",
+      // doj: "2010-05-15",
+      // gender: "Male",
+      // qualification: "Ph.D.",
       //   },
       //   {
       //     id: "f2",
@@ -279,7 +283,7 @@ export default {
         return object.id === item.id;
       });
       this.editedItem = Object.assign({}, item);
-      this.deleItem= item
+      this.deleItem = item;
       this.dialog = true;
     },
 
@@ -289,7 +293,6 @@ export default {
       this.editedIndex = this.allFaculties.findIndex((object) => {
         return object.id === item.id;
       });
-      
 
       console.log("index deleteItem", this.editedIndex);
       this.editedItem = Object.assign({}, item);
@@ -303,7 +306,7 @@ export default {
       console.log("delete Item", this.deleItem);
       console.log("deleteItemConfirm");
       this.closeDelete();
-      this.initialize()
+      this.initialize();
     },
 
     close() {

@@ -4,10 +4,10 @@
       <v-row>
         <v-col v-for="exam in exams" :key="exam.id" cols="4">
           <v-card class="pa-4" :color="exam.color">
-            <div class="headline font-weight-bold">{{ exam.exam.title }}</div>
-            <div class="caption">{{ exam.startTime }} - {{ exam.endTime }}</div>
-            <div class="">{{ exam.selectedFaculty.name }}, {{ exam.selectedFaculty.designation}}</div>
-            <div class="body-2 mt-4">{{ exam.description }}</div>
+            <div class="headline font-weight-bold title">{{ exam.exam.title }}</div>
+            <div class="caption duration">{{ exam.startTime }} - {{ exam.endTime }}</div>
+            <div class="name">{{ exam.selectedFaculty.name }}, {{ exam.selectedFaculty.designation}}</div>
+            <div class="body-2 mt-4 description">{{ exam.description }}</div>
             <v-row class="mt-4">
               <v-col v-if="exam.status == 'Request'"  cols="6">
                 <v-btn

@@ -125,7 +125,7 @@ import { facultyService, scheduleService } from '../../service'
        handleClick(row) {
         if(row.status == "Accept"){
           this.stat= "Accepted"
-          this.clas= "Green"
+          this.clas= "green"
           this.dialogAccept = true
         }
         else if(row.status == "Request"){

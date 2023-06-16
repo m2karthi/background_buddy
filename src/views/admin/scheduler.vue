@@ -17,26 +17,27 @@
             </v-btn>
           </template>
           <v-card>
-            <v-card-title>
-              <span class="text-h5">{{ formTitle }}</span>
-            </v-card-title>
+            <form @submit.prevent="save">
+              <v-card-title>
+                <span class="text-h5">{{ formTitle }}</span>
+              </v-card-title>
 
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-autocomplete
-                            item-text="title"
-                            :items="allExams"
-                            v-model="editedItem.exam"
-                            label="Select Exam"
-                            clearable
-                            persistent-hint
-                            return-object
-                            required
-                            single-line
-                          ></v-autocomplete>
-                    <!-- <v-text-field
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-autocomplete
+                        item-text="title"
+                        :items="allExams"
+                        v-model="editedItem.exam"
+                        label="Select Exam"
+                        clearable
+                        persistent-hint
+                        return-object
+                        required
+                        single-line
+                      ></v-autocomplete>
+                      <!-- <v-text-field
                       clearable
                       required
                       v-model="editedItem.title"
@@ -45,75 +46,74 @@
                       maxlength="30"
                       minlength="2"
                     ></v-text-field> -->
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-autocomplete
-                            item-text="name"
-                            :items="allFaculties"
-                            v-model="editedItem.selectedFaculty"
-                            label="Assign Faculty"
-                            clearable
-                            persistent-hint
-                            return-object
-                            required
-                            single-line
-                          ></v-autocomplete>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-select
-                      :items="allClass"
-                      required
-                      v-model="editedItem.class"
-                      label="class"
-                    ></v-select>
-                  </v-col>
-                
-                
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      clearable
-                      required
-                      v-model="editedItem.startTime"
-                      label="startTime"
-                      type="time"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      required
-                      v-model="editedItem.endTime"
-                      label="endTime"
-                      type="time"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      required
-                      v-model="editedItem.date"
-                      label="Date"
-                      type="date"
-                    ></v-text-field>
-                  </v-col>
-                  
-                  
-                  
-                </v-row>
-              </v-container>
-            </v-card-text>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-autocomplete
+                        item-text="name"
+                        :items="allFaculties"
+                        v-model="editedItem.selectedFaculty"
+                        label="Assign Faculty"
+                        clearable
+                        persistent-hint
+                        return-object
+                        required
+                        single-line
+                      ></v-autocomplete>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                        :items="allClass"
+                        required
+                        v-model="editedItem.class"
+                        label="class"
+                      ></v-select>
+                    </v-col>
 
-            <v-card-actions>
-              <v-btn
-                v-if="editedIndex != -1"
-                color="error darken-1"
-                text
-                @click="deleteItem(editedItem)"
-              >
-                Delete
-              </v-btn>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
-              <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
-            </v-card-actions>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        clearable
+                        required
+                        v-model="editedItem.startTime"
+                        label="startTime"
+                        type="time"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        required
+                        v-model="editedItem.endTime"
+                        label="endTime"
+                        type="time"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field
+                        required
+                        v-model="editedItem.date"
+                        label="Date"
+                        type="date"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-btn
+                  v-if="editedIndex != -1"
+                  color="error darken-1"
+                  text
+                  @click="deleteItem(editedItem)"
+                >
+                  Delete
+                </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="close">
+                  Cancel
+                </v-btn>
+                <v-btn color="blue darken-1" text type="submit"> Save </v-btn>
+              </v-card-actions>
+            </form>
           </v-card>
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
@@ -162,9 +162,9 @@ export default {
   data: () => ({
     dialog: false,
     dialogDelete: false,
-    
+
     allClass: ["A101", "A102", "A103", "B101", "A201", "B201", "B202"],
-    allYear: [1,2,3,4],
+    allYear: [1, 2, 3, 4],
     allCourse: ["B.Tech", "M.Tech", "Bsc", "Msc"],
     headers: [
       {
@@ -195,10 +195,9 @@ export default {
       startTime: null,
       date: null,
       endTime: null,
-      
     },
     defaultItem: {
-       id: null,
+      id: null,
       exam: null,
       selectedFaculty: null,
       class: null,
@@ -210,9 +209,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1
-        ? "Assign Schedule"
-        : "Edit Schedule";
+      return this.editedIndex === -1 ? "Assign Schedule" : "Edit Schedule";
     },
   },
 
@@ -231,7 +228,7 @@ export default {
 
   methods: {
     async initialize() {
-      this.allSchedules= await scheduleService.getAllScheduleData()
+      this.allSchedules = await scheduleService.getAllScheduleData();
       this.allExams = await examService.getAllExamData();
       this.allFaculties = await facultyService.getAllFacultyData();
 
@@ -290,7 +287,7 @@ export default {
       console.log("delete Item", this.editedItem);
       console.log("deleteItemConfirm");
       this.closeDelete();
-      this.initialize()
+      this.initialize();
     },
 
     close() {

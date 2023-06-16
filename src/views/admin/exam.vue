@@ -17,6 +17,8 @@
             </v-btn>
           </template>
           <v-card>
+            <form @submit.prevent="save">
+
             <v-card-title>
               <span class="text-h5">{{ formTitle }}</span>
             </v-card-title>
@@ -122,8 +124,9 @@
               </v-btn>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
-              <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+              <v-btn color="blue darken-1" text type="submit"> Save </v-btn>
             </v-card-actions>
+            </form>
           </v-card>
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">

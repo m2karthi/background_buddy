@@ -184,7 +184,7 @@ async function updateScheduleData(ScheduleData) {
         });
         console.log("indd", indd)
 
-        if(index > 0){
+        if(index > -1){
             Object.assign(userSchedules[indd], ScheduleData);
 
         }else{
